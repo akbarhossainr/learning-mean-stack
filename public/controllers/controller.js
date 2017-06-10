@@ -5,4 +5,11 @@ myApp.controller('ContactListController', function($scope, $http){
 		console.log(response);
 		$scope.contactlist = response.data;
 	});
+
+	$scope.submit = function () {
+		console.log($scope.contact);
+		$http.post('contactlist', $scope.contact).then(function (response) {
+			console.log(response.data);
+		});
+	}
 });

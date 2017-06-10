@@ -12,6 +12,21 @@
 			<h2>H! I am learning MEAN Stack from the very beginning.</h2>
 		</div>
 		<div class="col-sm-12">
+			<form ng-submit="submit()" class="form-inline">
+				<div class="form-group">
+					<label for="name">Name</label>
+					<input type="text" class="form-control" id="name" name="name" ng-model="contact.name" placeholder="Name">
+				</div>
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="email" class="form-control" id="email" name="email" ng-model="contact.email" placeholder="jane.doe@example.com">
+				</div>
+				<div class="form-group">
+					<label for="phone">phone</label>
+					<input type="text" class="form-control" id="phone" name="phone" ng-model="contact.phone" placeholder="phone">
+				</div>
+				<button type="submit" class="btn btn-default">Save</button>
+			</form>
 			<table class="table table-striped">
 				<thead>
 					<tr>
