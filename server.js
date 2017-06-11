@@ -12,7 +12,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.get('/contactlist', function (req, res) {
 	console.log("I received a get request!");
-	db.contactlist.find(function (err, docs) {
+	db.contactlist.find().sort({'_id':-1}, function (err, docs) {
 		console.log(docs);
 		res.json(docs);
 	});
@@ -40,6 +40,31 @@ app.post('/contactlist', function (req, res) {
 	console.log(req.body);
 	db.contactlist.insert(req.body, function (err, doc) {
 		console.log(doc);
+		res.json(doc);
+	});
+});
+
+app.put('/contactlist/:id', function (req, res) {
+	var id = req.params.id;
+	console.log(req.body);
+	db.contactlist.update({_id:mongojs.ObjectId(id)}, req.body, function (err, doc) {
+		console.log(doc);
+		res.json(doc);
+	});
+});
+
+app.delete('/contactlist/:id', function (req, res) {
+	var id = req.params.id;
+	console.log(id);
+	db.contactlist.remove({_id:mongojs.ObjectId(id)}, function (err, doc) {
+		res.json(doc);
+	});
+});
+
+app.get('/contactlist/:id', function (req, res) {
+	var id = req.params.id;
+	console.log(id);
+	db.contactlist.findOne({_id:mongojs.ObjectId(id)}, function (err, doc) {
 		res.json(doc);
 	});
 });
