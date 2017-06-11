@@ -47,9 +47,18 @@ app.post('/contactlist', function (req, res) {
 app.put('/contactlist/:id', function (req, res) {
 	var id = req.params.id;
 	console.log(req.body);
-	db.contactlist.update({_id:mongojs.ObjectId(id)}, req.body, function (err, doc) {
-		console.log(doc);
+	/*db.contactlist.findAndModify({query: {_id: mongojs.ObjectId(id)},
+		update: {$set: {name:req.body.name, email:req.body.email,  phone:req.body.phone }},
+		new: true
+	}, function (err, doc) {
 		res.json(doc);
+	});*/
+	db.contactlist.update(
+		{_id: mongojs.ObjectId(id)},
+		{$set: {name:req.body.name, email:req.body.email,  phone:req.body.phone }},
+		function (err, doc) {
+			console.log(doc);
+			res.json(doc);
 	});
 });
 

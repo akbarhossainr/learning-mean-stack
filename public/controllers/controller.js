@@ -11,13 +11,17 @@ myApp.controller('ContactListController', function($scope, $http){
 	getContactList();
 
 	$scope.submit = function () {
-		if ($scope.contact._id != 'undefined') {
+		console.log($scope.contact._id);
+
+		if ($scope.contact._id != undefined) {
 			$http.put('contactlist/'+$scope.contact._id, $scope.contact).then(function (response) {
 				console.log(response.data);
+				$scope.contact = {};
 			});
 		}else{
 			$http.post('contactlist', $scope.contact).then(function (response) {
 				console.log(response.data);
+				$scope.contact = {};
 			});
 		}
 		getContactList();
@@ -37,6 +41,10 @@ myApp.controller('ContactListController', function($scope, $http){
 			$scope.contact = contact;
 
 		});
+	};
+
+	$scope.reset = function () {
+		$scope.contact = {};
 	};
 
 });
